@@ -81,7 +81,9 @@ class _ToDoListHomeScreenState extends State<ToDoListHomeScreen> {
           onPressed: () async {
             bool loading = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => addAndUpdateScreen()),
+              MaterialPageRoute(
+                builder: (context) => const addAndUpdateScreen(),
+              ),
             );
             if (loading == true) {
               getAllTodos();

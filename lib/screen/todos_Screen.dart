@@ -42,8 +42,10 @@ class TodosScreen extends StatelessWidget {
                             horizontal: 20,
                             vertical: 5,
                           ),
-                          child: Icon(
-                            Icons.delete_outline,
+
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.delete_outline),
                             color: Colors.redAccent,
                           ),
                         ),
