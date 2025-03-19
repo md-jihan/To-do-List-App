@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/models/get_all_todos.dart';
 
+import 'add_and_update_todo.dart';
+
 class TodosScreen extends StatelessWidget {
   final List<Items> todoList;
 
@@ -15,63 +17,74 @@ class TodosScreen extends StatelessWidget {
           itemCount: todoList.length,
           itemBuilder: (context, index) {
             final item = todoList[index];
-            return Card(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            item.title ?? "",
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => addAndUpdateScreen(items: item),
+                  ),
+                );
+              },
+              child: Card(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              item.title ?? "",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 5,
-                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 5,
+                            ),
 
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.delete_outline),
-                            color: Colors.redAccent,
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.delete_outline),
+                              color: Colors.redAccent,
+                            ),
                           ),
+                        ],
+                      ),
+                      Text(
+                        item.description ?? "",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
                         ),
-                      ],
-                    ),
-                    Text(
-                      item.description ?? "",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
                       ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        borderRadius: BorderRadius.circular(50),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 5,
+                        ),
+                        child: Text(
+                          item.isCompleted == true ? 'Complete' : 'Incomplete',
+                        ),
                       ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 5,
-                      ),
-                      child: Text(
-                        item.isCompleted == true ? 'Complete' : 'Incomplete',
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

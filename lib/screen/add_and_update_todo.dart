@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/api_services/api_services.dart';
+import 'package:flutter_application_4/models/get_all_todos.dart';
 import 'package:flutter_application_4/utils/common_toast.dart';
 // import 'package:flutter_application_4/api_services/api_services.dart';
 
 class addAndUpdateScreen extends StatefulWidget {
-  const addAndUpdateScreen({super.key});
+  final Items? items;
+  const addAndUpdateScreen({super.key, this.items});
 
   @override
   State<addAndUpdateScreen> createState() => _addAndUpdateScreenState();
@@ -14,6 +16,13 @@ class _addAndUpdateScreenState extends State<addAndUpdateScreen> {
   TextEditingController title = TextEditingController();
   TextEditingController Description = TextEditingController();
   bool isComplete = false;
+
+  @override
+  void initState() {
+    if (widget.items != null) {}
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
