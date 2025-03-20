@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_4/api_services/api_services.dart';
-import 'package:flutter_application_4/home.dart';
-import 'package:flutter_application_4/utils/common_toast.dart';
+import '../api_services/api_services.dart';
+import '../home.dart';
+import '../utils/common_toast.dart';
 
 class DeleteButton extends StatefulWidget {
   final String id;

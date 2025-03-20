@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_4/models/get_all_todos.dart';
-import 'package:flutter_application_4/screen/delete_button.dart';
 
+import '../models/get_all_todos.dart';
+import 'delete_button.dart';
 import 'add_and_update_todo.dart';
 
 class TodosScreen extends StatelessWidget {

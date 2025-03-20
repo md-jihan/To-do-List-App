@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_4/api_services/api_services.dart';
-import 'package:flutter_application_4/models/get_all_todos.dart';
+import './api_services/api_services.dart';
+import './models/get_all_todos.dart';
 import 'screen/add_and_update_todo.dart';
-import 'package:flutter_application_4/screen/todos_Screen.dart';
+import './screen/todos_Screen.dart';
 
 class ToDoListHomeScreen extends StatefulWidget {
   const ToDoListHomeScreen({super.key});
