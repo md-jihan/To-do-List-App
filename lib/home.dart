@@ -19,6 +19,9 @@ class _ToDoListHomeScreenState extends State<ToDoListHomeScreen> {
   getAllTodos() async {
     setState(() {
       isLoading = true;
+      getAllTodoModel.items?.clear();
+      inCompleteTodo.clear();
+      completeTodo.clear();
     });
     await ApiService()
         .getAllTodos()
@@ -63,7 +66,7 @@ class _ToDoListHomeScreenState extends State<ToDoListHomeScreen> {
               fontSize: 20,
               fontWeight: FontWeight.w400,
             ),
-            tabs: [Text("All"), Text("Incomplete"), Text("Complete,")],
+            tabs: [Text("All"), Text("Incomplete"), Text("Complete")],
           ),
         ),
 

@@ -47,6 +47,9 @@ class _DeleteButtonState extends State<DeleteButton> {
             });
       },
       child: Container(
+        height: 40,
+        width: 100,
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.inversePrimary,
           borderRadius: BorderRadius.circular(50),
@@ -56,11 +59,9 @@ class _DeleteButtonState extends State<DeleteButton> {
         child:
             isLoading
                 ? SizedBox(
-                  height: 40,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CircularProgressIndicator(),
-                  ),
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(),
                 )
                 : Icon(Icons.delete_outline, color: Colors.redAccent),
       ),

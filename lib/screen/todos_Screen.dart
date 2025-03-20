@@ -16,6 +16,7 @@ class TodosScreen extends StatelessWidget {
         : ListView.separated(
           separatorBuilder: (context, i) => const SizedBox(height: 10),
           itemCount: todoList.length,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           itemBuilder: (context, index) {
             final item = todoList[index];
             return GestureDetector(
