@@ -25,7 +25,11 @@ class _DeleteButtonState extends State<DeleteButton> {
         ApiService()
             .deleteTodos(widget.id)
             .then((value) {
-              commonToast(context, "Delete Successfully");
+              commonToast(
+                context,
+                "Delete Successfully",
+                bgColor: Colors.green,
+              );
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => ToDoListHomeScreen()),
@@ -52,7 +56,7 @@ class _DeleteButtonState extends State<DeleteButton> {
         child:
             isLoading
                 ? SizedBox(
-                  height: 50,
+                  height: 40,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircularProgressIndicator(),
