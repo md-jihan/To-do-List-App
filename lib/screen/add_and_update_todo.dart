@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/api_services/api_services.dart';
+import 'package:flutter_application_4/home.dart';
 import 'package:flutter_application_4/models/get_all_todos.dart';
 import 'package:flutter_application_4/utils/common_toast.dart';
 // import 'package:flutter_application_4/api_services/api_services.dart';
@@ -16,10 +17,16 @@ class _addAndUpdateScreenState extends State<addAndUpdateScreen> {
   TextEditingController title = TextEditingController();
   TextEditingController Description = TextEditingController();
   bool isComplete = false;
+  bool isLoading = false;
 
   @override
   void initState() {
-    if (widget.items != null) {}
+    if (widget.items != null) {
+      title.text = widget.items?.title ?? "";
+      Description.text = widget.items?.description ?? "";
+      isComplete = widget.items?.isCompleted ?? false;
+      setState(() {});
+    }
     super.initState();
   }
 
@@ -28,13 +35,14 @@ class _addAndUpdateScreenState extends State<addAndUpdateScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Add To-do"),
+        title: Text(widget.items == null ? "Add To-do" : "Update To-do"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             TextField(
+              autofocus: widget.items == null ? true : false,
               style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
               decoration: InputDecoration(
                 hintText: "Title",
@@ -82,21 +90,54 @@ class _addAndUpdateScreenState extends State<addAndUpdateScreen> {
           } else if (Description.text.isEmpty) {
             commonToast(context, "Please enter description");
           } else {
-            ApiService()
-                .addTodos(
-                  title.text.toString(),
-                  Description.text.toString(),
-                  isComplete,
-                )
-                .then((value) {
-                  Navigator.pop(context, true);
-                })
-                .onError((error, stackTrace) {
-                  debugPrint(error.toString());
-                });
+            setState(() {
+              isLoading = true;
+            });
+            if (widget.items == null) {
+              ApiService()
+                  .addTodos(
+                    title.text.toString(),
+                    Description.text.toString(),
+                    isComplete,
+                  )
+                  .then((value) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.pop(context, true);
+                  })
+                  .onError((error, stackTrace) {
+                    debugPrint(error.toString());
+                  });
+            } else {
+              ApiService()
+                  .updateTodo(
+                    widget.items!.sId!,
+                    title.text.toString(),
+                    Description.text.toString(),
+                    isComplete,
+                  )
+                  .then((value) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ToDoListHomeScreen(),
+                      ),
+                    );
+                  })
+                  .onError((error, StackTrace) {
+                    debugPrint(error.toString());
+                  });
+            }
           }
         },
-        child: Icon(Icons.done),
+        child:
+            isLoading
+                ? const CircularProgressIndicator()
+                : const Icon(Icons.done),
       ),
     );
   }

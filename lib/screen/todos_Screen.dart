@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/models/get_all_todos.dart';
+import 'package:flutter_application_4/screen/delete_button.dart';
 
 import 'add_and_update_todo.dart';
 
@@ -44,23 +45,7 @@ class TodosScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color:
-                                  Theme.of(context).colorScheme.inversePrimary,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 5,
-                            ),
-
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.delete_outline),
-                              color: Colors.redAccent,
-                            ),
-                          ),
+                          DeleteButton(id: item.sId ?? ""),
                         ],
                       ),
                       Text(
