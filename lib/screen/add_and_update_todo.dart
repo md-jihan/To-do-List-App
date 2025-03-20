@@ -108,6 +108,10 @@ class _addAndUpdateScreenState extends State<addAndUpdateScreen> {
                   })
                   .onError((error, stackTrace) {
                     debugPrint(error.toString());
+                    setState(() {
+                      isLoading = false;
+                    });
+                    commonToast(context, "Something went wrong");
                   });
             } else {
               ApiService()
@@ -130,6 +134,11 @@ class _addAndUpdateScreenState extends State<addAndUpdateScreen> {
                   })
                   .onError((error, StackTrace) {
                     debugPrint(error.toString());
+
+                    setState(() {
+                      isLoading = false;
+                    });
+                    commonToast(context, "Something went wrong");
                   });
             }
           }
